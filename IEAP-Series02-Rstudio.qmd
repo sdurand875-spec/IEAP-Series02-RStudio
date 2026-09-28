@@ -1,0 +1,13 @@
+---
+title: "IEAP Series 02 – Data mining and statistical tests"
+author:
+  - Sarah Durand
+  - Albatoul Ahmad
+  - Damien Clanet
+date: today
+format: pdf
+toc: true
+number-sections: true
+---
+
+GitHub repository: <https://github.com/sdurand875-spec/IEAP-Series02-RStudio>
