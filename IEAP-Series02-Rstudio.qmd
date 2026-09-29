@@ -11,3 +11,9 @@ number-sections: true
 ---
 
 GitHub repository: <https://github.com/sdurand875-spec/IEAP-Series02-RStudio>
+
+{{< include Sections/Damien_2.1-definitions.qmd >}}
+
+{{< include Sections/Sarah_2.2-prepost.qmd >}}
+
+{{< include Sections/Albatoul_2.3-snore.qmd >}}
