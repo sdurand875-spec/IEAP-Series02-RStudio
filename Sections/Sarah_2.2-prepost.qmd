@@ -1,5 +1,26 @@
----
+------------------------------------------------------------------------
 
----
+------------------------------------------------------------------------
 
 # Effect of treatment over time
+
+\## The data
+
+```{r s22-load-data}
+library(tidyverse)
+library(here)
+
+prepost <- read.csv(here("data", "PrePost.csv"))
+str(prepost)
+summary(prepost)
+table(prepost$time)
+```
+
+The file `PrePost.csv` contains 16 observations and 2 variables: a performance measure (`perf`) and the time of measurement (`time`), with 8 measurements before and 8 measurements after the rehabilitation program.
+
+No variable identifies the participants, so the file itself does not tell us whether the same individuals were measured before and after.
+
+| Variable | Description | Unit | Possible values | Expected change |
+|-------|---------------|---------------|--------------|---------------|
+| Perf | Physical performance of cardiac patients, measured before and after a rehabilitation training program | Not specified (possibly watts on a cycle ergometer) | Positive values; observed range 125–148 | Increase after rehabilitation |
+| time | Moment of the measurement | – | "Before", "After" | – |
