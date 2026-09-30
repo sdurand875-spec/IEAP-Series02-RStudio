@@ -128,3 +128,23 @@ prepost %>%
 ```
 
 The graph shows a slight upward shift of performance after rehabilitation (both the median and the mean are higher), but the two distributions largely overlap.
+
+### 5. Statistical test and result
+
+```{r s22-welch}
+# parametric test: Welch t-test (independent groups, two-sided)
+t.test(after, before, paired = FALSE)
+```
+
+```{r s22-wilcoxon}
+# non-parametric check: Wilcoxon rank-sum (Mann-Whitney) test
+wilcox.test(after, before, paired = FALSE, exact = FALSE)
+```
+
+The Welch t-test did not show a significant difference in performance between before and after rehabilitation (t = 0.76, df = 13.8, p = 0.46). The 95% confidence interval of the difference in means (−4.6 to +9.6) includes 0. The Wilcoxon rank-sum test led to the same conclusion (W = 39.5, p = 0.46), which confirms that the result does not depend on the normality assumption.
+
+**Result sentence:**
+
+*"Physical performance was not significantly different after rehabilitation compared with before (137.6 ± 7.0 vs 135.1 ± 6.2; Welch t-test, t(13.8) = 0.76, p = 0.46)."*
+
+**Limits.** This non-significant result does not prove that the rehabilitation has no effect: it only means that the data do not provide sufficient evidence of an effect. Several factors limit the power of the analysis: (1) the very small sample size (8 observations per group); (2) the large variability between individuals compared with the observed difference; (3) the impossibility of using a paired design, because no participant identifier is available. If the same patients were measured before and after, a paired test, which removes the variability between individuals, would be more appropriate and more powerful. The conclusion could therefore change with properly identified paired data.
