@@ -4,7 +4,7 @@
 
 # Effect of treatment over time
 
-\## The data
+## The data
 
 ```{r s22-load-data}
 library(tidyverse)
@@ -21,6 +21,116 @@ The file `PrePost.csv` contains 16 observations and 2 variables: a performance m
 No variable identifies the participants, so the file itself does not tell us whether the same individuals were measured before and after.
 
 | Variable | Description | Unit | Possible values | Expected change |
-|-------|---------------|---------------|--------------|---------------|
-| Perf | Physical performance of cardiac patients, measured before and after a rehabilitation training program | Not specified (possibly watts on a cycle ergometer) | Positive values; observed range 125–148 | Increase after rehabilitation |
-| time | Moment of the measurement | – | "Before", "After" | – |
+|---------------|---------------|---------------|---------------|---------------|
+| `perf` | Physical performance measured before and after the rehabilitation program | Not specified | Positive numerical values; observed range: 125–148 | Expected to increase after rehabilitation |
+| `time` | Time of measurement relative to the rehabilitation program | Not applicable | `"Before"`, `"After"` | / |
+
+## The analysis
+
+### 1. Does the treatment have an effect?
+
+The objective is to determine whether the rehabilitation program has an effect on physical performance.
+
+Because rehabilitation is expected to improve the patients' performance, we expect the performance values to be higher **after** the rehabilitation program than **before**.
+
+Therefore, the comparison of interest is: **Before vs After rehabilitation.**
+
+### 2. Which type of comparison should be used?
+
+Ideally, a before-after study would use a **paired comparison**, because the same patient would be measured before and after rehabilitation.
+
+In a paired analysis, the difference would be calculated for each participant:
+
+$$\text{Difference} = \text{After} - \text{Before}$$
+
+However, the dataset does not contain any participant identifier. Therefore, it is impossible to determine from the file whether each `"Before"` observation corresponds to a specific `"After"` observation.
+
+For this reason, the two sets of observations will be treated as **independent groups** for the statistical analysis.
+
+### 3. Parametric or non-parametric test?
+
+The choice of statistical test depends on the distribution of the data and on whether the observations are paired or independent.
+
+| Comparison       | Parametric test | Non-parametric test                   |
+|------------------|-----------------|---------------------------------------|
+| Paired data      | Paired t-test   | Wilcoxon signed-rank test             |
+| Independent data | Welch t-test    | Mann–Whitney / Wilcoxon rank-sum test |
+
+There are only **8 observations per group**, so the sample size is very small.
+
+A normality test can be performed, but with such a small sample it has limited power to detect deviations from normality.
+
+Because the pairing between observations cannot be established from the dataset, we will consider an **independent comparison**.
+
+Before choosing between the Welch t-test and the Wilcoxon rank-sum test, the distribution of the data will be explored graphically and with descriptive statistics.
+
+### 4. Which graph should be used?
+
+A boxplot can be used to compare performance before and after rehabilitation.
+
+Because there are only 8 observations in each group, the individual observations should also be displayed on the graph.
+
+This makes it possible to see both the overall distribution and each individual value.
+
+### 5. How should the result be reported?
+
+The final conclusion will depend on the p-value obtained from the statistical test.
+
+If:
+
+$p < 0.05$
+
+we will reject the null hypothesis and conclude that there is evidence of a difference in performance before and after rehabilitation.
+
+If:
+
+$p \geq 0.05$
+
+we will not reject the null hypothesis, meaning that the data do not provide sufficient evidence of a significant difference.
+
+The final result can be reported in the following form:
+
+*"Performance was \[significantly / not significantly\] different after rehabilitation compared with before rehabilitation (median: X before vs Y after; \[name of test\], p = X)."*
+
+## The analysis
+
+### Descriptive statistics
+
+```{r s22-desc}
+prepost %>%
+  group_by(time) %>%
+  summarise(n = n(), mean = mean(perf), sd = sd(perf),
+            median = median(perf), IQR = IQR(perf))
+```
+
+### Normality
+
+```{r s22-normality}
+shapiro.test(prepost$perf[prepost$time == "Before"])
+shapiro.test(prepost$perf[prepost$time == "After"])
+```
+
+### Graph
+
+```{r s22-boxplot}
+prepost %>%
+  mutate(time = factor(time, levels = c("Before", "After"))) %>%
+  ggplot(aes(x = time, y = perf, fill = time)) +
+    geom_boxplot(alpha = 0.5) +
+    geom_jitter(width = 0.1) +
+    labs(x = "", y = "Performance") +
+    theme_minimal()
+```
+
+### Statistical tests
+
+```{r s22-tests}
+before <- prepost$perf[prepost$time == "Before"]
+after  <- prepost$perf[prepost$time == "After"]
+
+# unpaired (independent groups)
+wilcox.test(after, before, paired = FALSE)
+
+# paired (same patients, in the same order)
+wilcox.test(after, before, paired = TRUE)
+```
