@@ -51,3 +51,24 @@ wilcox.test(weight ~ snore, data = snore)
 The data do not support the stereotype that snorers are heavier than non-snorers. A Wilcoxon rank-sum test showed no significant difference in weight between the two groups (W = 1154, p = 0.908).
 
 
+## Do snorers drink more alcohol?
+Let's compare alcohol consumption between snorers and non-snorers.
+
+```{r}
+boxplot(
+alcool ~ snore,
+data = snore,
+col = c("lightblue", "salmon"),
+xlab = "Snoring",
+ylab = "Alcohol consumption",
+main = "Alcohol consumption by snoring status"
+)
+```
+```{r}
+wilcox.test(alcool ~ snore, data = snore)
+```
+
+### conclusion
+
+Alcohol consumption was compared between snorers and non-snorers using a Wilcoxon rank-sum test. The test showed a statistically significant difference between the two groups (W = 788, p = 0.009). Therefore, the data support the stereotype that snorers consume more alcohol than non-snorers.
+
