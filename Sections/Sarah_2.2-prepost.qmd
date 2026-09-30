@@ -101,14 +101,19 @@ The choice of test depends on whether the observations are paired and on the dis
 | Paired data      | Paired t-test   | Wilcoxon signed-rank test             |
 | Independent data | Welch t-test    | Mann–Whitney / Wilcoxon rank-sum test |
 
-Since the groups are treated as independent (question 2), the choice is between the Welch t-test and the Wilcoxon rank-sum test. Normality is checked in each group with the Shapiro–Wilk test:
+Since the groups are treated as independent (question 2), the choice is between the Welch t-test and the Wilcoxon rank-sum test. 
+
+**Normality** is checked in each group with the Shapiro–Wilk test:
 
 ```{r s22-normality}
 shapiro.test(before)
 shapiro.test(after)
 ```
+The Shapiro–Wilk test does not detect a significant deviation from normality in either group. However, with only 8 observations per group, the test has limited power.
 
-The Shapiro–Wilk test did not detect any deviation from normality, neither before (W = 0.997, p = 0.9999) nor after rehabilitation (W = 0.983, p = 0.977). However, with only 8 observations per group, this test has limited power. Since no deviation from normality was detected, the data are summarised with mean ± SD and a **Welch t-test** is used. The result is confirmed with its non-parametric equivalent, the **Wilcoxon rank-sum test**, as a robustness check.
+Because of the small sample size, the data are mainly described using the median and interquartile range (IQR).
+
+To remain consistent with this approach, a non-parametric Wilcoxon rank-sum test (Mann–Whitney test) will be used to compare performance before and after rehabilitation.
 
 ### 4. Which graph illustrates the effect of the treatment?
 
@@ -145,6 +150,6 @@ The Welch t-test did not show a significant difference in performance between be
 
 **Result sentence:**
 
-*"Physical performance was not significantly different after rehabilitation compared with before (137.6 ± 7.0 vs 135.1 ± 6.2; Welch t-test, t(13.8) = 0.76, p = 0.46)."*
+*"Physical performance was not significantly different after rehabilitation compared with before (median: 137.5 [IQR = 9.25] vs 135.5 [IQR = 7.00]; Wilcoxon rank-sum test, p = 0.46)."*
 
 **Limits.** This non-significant result does not prove that the rehabilitation has no effect: it only means that the data do not provide sufficient evidence of an effect. Several factors limit the power of the analysis: (1) the very small sample size (8 observations per group); (2) the large variability between individuals compared with the observed difference; (3) the impossibility of using a paired design, because no participant identifier is available. If the same patients were measured before and after, a paired test, which removes the variability between individuals, would be more appropriate and more powerful. The conclusion could therefore change with properly identified paired data.
