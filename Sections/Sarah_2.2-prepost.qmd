@@ -1,5 +1,155 @@
----
+------------------------------------------------------------------------
 
----
+------------------------------------------------------------------------
 
 # Effect of treatment over time
+
+## The data
+
+```{r s22-load-data}
+library(tidyverse)
+library(here)
+
+prepost <- read.csv(here("data", "PrePost.csv"))
+str(prepost)
+summary(prepost)
+table(prepost$time)
+```
+
+The file `PrePost.csv` contains 16 observations and 2 variables: a performance measure (`perf`) and the time of measurement (`time`), with 8 measurements before and 8 measurements after the rehabilitation program.
+
+No variable identifies the participants, so the file itself does not tell us whether the same individuals were measured before and after.
+
+| Variable | Description | Unit | Possible values | Expected change |
+|---------------|---------------|---------------|---------------|---------------|
+| `perf` | Physical performance measured before and after the rehabilitation program | Not specified | Positive numerical values; observed range: 125–148 | Expected to increase after rehabilitation |
+| `time` | Time of measurement relative to the rehabilitation program | Not applicable | `"Before"`, `"After"` | / |
+
+## The analysis
+
+### 1. Does the treatment have an effect?
+
+The objective is to determine whether the rehabilitation program has an effect on physical performance. Because rehabilitation is expected to improve the patients' performance, we expect the performance values to be higher **after** the rehabilitation program than **before**. The comparison of interest is therefore: **Before vs After rehabilitation**.
+
+```{r s22-desc}
+# descriptive statistics for each time point
+prepost %>%
+  mutate(time = factor(time, levels = c("Before", "After"))) %>%
+  group_by(time) %>%
+  summarise(
+    n      = n(),
+    mean   = mean(perf),
+    sd     = sd(perf),
+    median = median(perf),
+    IQR    = IQR(perf),
+    min    = min(perf),
+    max    = max(perf)
+  )
+  
+```
+
+```{r s22-diff}
+# difference between after and before
+mean(prepost$perf[prepost$time == "After"]) -
+  mean(prepost$perf[prepost$time == "Before"])
+
+median(prepost$perf[prepost$time == "After"]) -
+  median(prepost$perf[prepost$time == "Before"])
+```
+
+Descriptively, performance was slightly higher after rehabilitation than before, both in mean (137.6 ± 7.0 vs 135.1 ± 6.2, i.e. +2.5 units) and in median (137.5 \[IQR = 9.25\] vs 135.5 \[IQR = 7.00\], i.e. +2 units). Mean ± SD is appropriate only if the data are normally distributed; otherwise, the median and IQR should be preferred. Normality is checked in question 3. In both cases, the difference is small compared with the variability between individuals, and the two distributions largely overlap (range 125–145 before vs 127–148 after). Whether this difference is statistically significant is tested in question 5.
+
+### 2. What comparison are you going to make?
+
+We compare physical performance **before** vs **after** the rehabilitation program (8 observations in each group).
+
+Ideally, a before–after study uses a **paired comparison**, because the same patients are measured twice. The analysis is then based on the difference computed for each participant:
+
+$$\text{Difference} = \text{After} - \text{Before}$$
+
+However, the dataset does not contain any participant identifier, so it is impossible to know which "Before" value corresponds to which "After" value.
+
+```{r s22-sorted}
+before <- prepost$perf[prepost$time == "Before"]
+after  <- prepost$perf[prepost$time == "After"]
+
+before
+after
+
+# are the values sorted in increasing order within each group?
+!is.unsorted(before)
+!is.unsorted(after)
+```
+
+Moreover, the values are sorted in increasing order within each group. Pairing them by row order would match the lowest "Before" value with the lowest "After" value, and so on, which would artificially create positive differences and bias a paired test.
+
+For these reasons, the two sets of observations are treated as **independent groups**. This is a conservative choice: if the data were truly paired, a paired test would be more powerful, so we may miss a real effect.
+
+### 3. Which test will you use? Parametric or non-parametric?
+
+**Hypotheses** (two-sided test):
+
+- H0: performance does not differ between before and after rehabilitation;
+- H1: performance differs between before and after rehabilitation.
+
+Although an increase is expected, a two-sided test is used, as it is more conservative and is the standard choice.
+
+The choice of test depends on whether the observations are paired and on the distribution of the data:
+
+| Comparison       | Parametric test | Non-parametric test                   |
+|------------------|-----------------|---------------------------------------|
+| Paired data      | Paired t-test   | Wilcoxon signed-rank test             |
+| Independent data | Welch t-test    | Mann–Whitney / Wilcoxon rank-sum test |
+
+Since the groups are treated as independent (question 2), the choice is between the Welch t-test and the Wilcoxon rank-sum test. 
+
+**Normality** is checked in each group with the Shapiro–Wilk test:
+
+```{r s22-normality}
+shapiro.test(before)
+shapiro.test(after)
+```
+The Shapiro–Wilk test does not detect a significant deviation from normality in either group. However, with only 8 observations per group, the test has limited power.
+
+Because of the small sample size, the data are mainly described using the median and interquartile range (IQR).
+
+To remain consistent with this approach, a non-parametric Wilcoxon rank-sum test (Mann–Whitney test) will be used to compare performance before and after rehabilitation.
+
+### 4. Which graph illustrates the effect of the treatment?
+
+A boxplot compares the distribution of performance before and after rehabilitation. Because there are only 8 observations per group, the individual values are also displayed, and the mean of each group is shown (black diamond), since the statistical test compares means. The groups are treated as independent, so the points are not connected between the two time points.
+
+```{r s22-boxplot}
+#| fig-cap: "Physical performance before and after rehabilitation. Boxes show the median and interquartile range, dots the individual values, and black diamonds the group means."
+prepost %>%
+  mutate(time = factor(time, levels = c("Before", "After"))) %>%
+  ggplot(aes(x = time, y = perf, fill = time)) +
+    geom_boxplot(alpha = 0.4, outlier.shape = NA) +
+    geom_jitter(width = 0.08, size = 2) +
+    stat_summary(fun = mean, geom = "point", shape = 18, size = 5) +
+    labs(x = "", y = "Performance (unit not specified)") +
+    theme_minimal() +
+    theme(legend.position = "none")
+```
+
+The graph shows a slight upward shift of performance after rehabilitation (both the median and the mean are higher), but the two distributions largely overlap.
+
+### 5. Statistical test and result
+
+```{r s22-welch}
+# parametric test: Welch t-test (independent groups, two-sided)
+t.test(after, before, paired = FALSE)
+```
+
+```{r s22-wilcoxon}
+# non-parametric check: Wilcoxon rank-sum (Mann-Whitney) test
+wilcox.test(after, before, paired = FALSE, exact = FALSE)
+```
+
+The Welch t-test did not show a significant difference in performance between before and after rehabilitation (t = 0.76, df = 13.8, p = 0.46). The 95% confidence interval of the difference in means (−4.6 to +9.6) includes 0. The Wilcoxon rank-sum test led to the same conclusion (W = 39.5, p = 0.46), which confirms that the result does not depend on the normality assumption.
+
+**Result sentence:**
+
+*"Physical performance was not significantly different after rehabilitation compared with before (median: 137.5 [IQR = 9.25] vs 135.5 [IQR = 7.00]; Wilcoxon rank-sum test, p = 0.46)."*
+
+**Limits.** This non-significant result does not prove that the rehabilitation has no effect: it only means that the data do not provide sufficient evidence of an effect. Several factors limit the power of the analysis: (1) the very small sample size (8 observations per group); (2) the large variability between individuals compared with the observed difference; (3) the impossibility of using a paired design, because no participant identifier is available. If the same patients were measured before and after, a paired test, which removes the variability between individuals, would be more appropriate and more powerful. The conclusion could therefore change with properly identified paired data.
