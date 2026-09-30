@@ -81,3 +81,24 @@ chisq.test(table(snore$snore, snore$tabac))
 ```
 ### conclusion
 The test showed no significant association between smoking and snoring status (χ² = 0.689, df = 1, p = 0.407). Therefore, the data do not support the stereotype that snorers smoke more than non-snorers.
+
+
+## Are men fatter?
+```{r}
+boxplot(
+weight ~ sex,
+data = snore,
+col = c("pink", "lightblue"),
+xlab = "Sex",
+ylab = "Weight (kg)",
+main = "Weight according to sex"
+)
+```
+
+```{r}
+wilcox.test(weight ~ sex, data = snore)
+```
+
+### conclusion
+The test showed no significant difference in weight between the two groups (W = 893.5, p = 0.729). Therefore, the data do not support the stereotype that men are fatter than women.
+
