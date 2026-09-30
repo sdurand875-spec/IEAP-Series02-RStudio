@@ -72,3 +72,12 @@ wilcox.test(alcool ~ snore, data = snore)
 
 Alcohol consumption was compared between snorers and non-snorers using a Wilcoxon rank-sum test. The test showed a statistically significant difference between the two groups (W = 788, p = 0.009). Therefore, the data support the stereotype that snorers consume more alcohol than non-snorers.
 
+## Do snorers smoke more?
+```{r}
+table(snore$snore, snore$tabac)
+```
+```{r}
+chisq.test(table(snore$snore, snore$tabac))
+```
+### conclusion
+The test showed no significant association between smoking and snoring status (χ² = 0.689, df = 1, p = 0.407). Therefore, the data do not support the stereotype that snorers smoke more than non-snorers.
