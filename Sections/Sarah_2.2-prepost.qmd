@@ -109,3 +109,22 @@ shapiro.test(after)
 ```
 
 The Shapiro–Wilk test did not detect any deviation from normality, neither before (W = 0.997, p = 0.9999) nor after rehabilitation (W = 0.983, p = 0.977). However, with only 8 observations per group, this test has limited power. Since no deviation from normality was detected, the data are summarised with mean ± SD and a **Welch t-test** is used. The result is confirmed with its non-parametric equivalent, the **Wilcoxon rank-sum test**, as a robustness check.
+
+### 4. Which graph illustrates the effect of the treatment?
+
+A boxplot compares the distribution of performance before and after rehabilitation. Because there are only 8 observations per group, the individual values are also displayed, and the mean of each group is shown (black diamond), since the statistical test compares means. The groups are treated as independent, so the points are not connected between the two time points.
+
+```{r s22-boxplot}
+#| fig-cap: "Physical performance before and after rehabilitation. Boxes show the median and interquartile range, dots the individual values, and black diamonds the group means."
+prepost %>%
+  mutate(time = factor(time, levels = c("Before", "After"))) %>%
+  ggplot(aes(x = time, y = perf, fill = time)) +
+    geom_boxplot(alpha = 0.4, outlier.shape = NA) +
+    geom_jitter(width = 0.08, size = 2) +
+    stat_summary(fun = mean, geom = "point", shape = 18, size = 5) +
+    labs(x = "", y = "Performance (unit not specified)") +
+    theme_minimal() +
+    theme(legend.position = "none")
+```
+
+The graph shows a slight upward shift of performance after rehabilitation (both the median and the mean are higher), but the two distributions largely overlap.
