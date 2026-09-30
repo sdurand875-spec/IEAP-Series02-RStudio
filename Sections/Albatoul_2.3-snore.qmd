@@ -102,3 +102,14 @@ wilcox.test(weight ~ sex, data = snore)
 ### conclusion
 The test showed no significant difference in weight between the two groups (W = 893.5, p = 0.729). Therefore, the data do not support the stereotype that men are fatter than women.
 
+## Do women smoke less?
+```{r}
+table(snore$sex, snore$tabac)
+```
+```{r}
+chisq.test(table(snore$sex, snore$tabac))
+```
+### conclusion
+The test revealed a significant association between sex and smoking status (χ² = 7.002, df = 1, p = 0.008). Therefore, the data support the stereotype that smoking habits differ between men and women.
+
+
