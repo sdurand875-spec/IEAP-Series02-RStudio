@@ -1,5 +1,53 @@
----
+------------------------------------------------------------------------
 
----
+------------------------------------------------------------------------
 
 # Testing some stereotypes
+
+```{r}
+library(here)
+
+snore <- read.table(
+here("data", "snore.txt"),
+header = TRUE
+)
+```
+
+```{r}
+head(snore)
+```
+
+## Exploring the snore data
+
+```{r}
+str(snore)
+summary(snore)
+names(snore)
+```
+
+The dataset contains anthropometric measurements (age, weight, height) and categorical variables describing sex, smoking status, alcohol consumption and snoring status.
+
+Statistical comparisons were performed to evaluate whether common stereotypes are supported by the data.
+
+## Are snorers fatter?
+
+```{r s23-boxplot-snore}
+boxplot( 
+  weight ~ snore,
+  data = snore,
+  col = c("lightblue","salmon"),
+  xlab = "Snoring",
+  ylab = "Weight (kg)",
+  main = "Weight according to snoring status" 
+  )
+```
+
+```{r}
+wilcox.test(weight ~ snore, data = snore)
+```
+
+### conclusion
+
+The data do not support the stereotype that snorers are heavier than non-snorers. A Wilcoxon rank-sum test showed no significant difference in weight between the two groups (W = 1154, p = 0.908).
+
+
