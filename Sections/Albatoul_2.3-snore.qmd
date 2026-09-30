@@ -50,8 +50,8 @@ wilcox.test(weight ~ snore, data = snore)
 
 The data do not support the stereotype that snorers are heavier than non-snorers. A Wilcoxon rank-sum test showed no significant difference in weight between the two groups (W = 1154, p = 0.908).
 
-
 ## Do snorers drink more alcohol?
+
 Let's compare alcohol consumption between snorers and non-snorers.
 
 ```{r}
@@ -64,6 +64,7 @@ ylab = "Alcohol consumption",
 main = "Alcohol consumption by snoring status"
 )
 ```
+
 ```{r}
 wilcox.test(alcool ~ snore, data = snore)
 ```
@@ -73,17 +74,21 @@ wilcox.test(alcool ~ snore, data = snore)
 Alcohol consumption was compared between snorers and non-snorers using a Wilcoxon rank-sum test. The test showed a statistically significant difference between the two groups (W = 788, p = 0.009). Therefore, the data support the stereotype that snorers consume more alcohol than non-snorers.
 
 ## Do snorers smoke more?
+
 ```{r}
 table(snore$snore, snore$tabac)
 ```
+
 ```{r}
 chisq.test(table(snore$snore, snore$tabac))
 ```
+
 ### conclusion
+
 The test showed no significant association between smoking and snoring status (χ² = 0.689, df = 1, p = 0.407). Therefore, the data do not support the stereotype that snorers smoke more than non-snorers.
 
-
 ## Are men fatter?
+
 ```{r}
 boxplot(
 weight ~ sex,
@@ -100,16 +105,35 @@ wilcox.test(weight ~ sex, data = snore)
 ```
 
 ### conclusion
+
 The test showed no significant difference in weight between the two groups (W = 893.5, p = 0.729). Therefore, the data do not support the stereotype that men are fatter than women.
 
 ## Do women smoke less?
+
 ```{r}
 table(snore$sex, snore$tabac)
 ```
+
 ```{r}
 chisq.test(table(snore$sex, snore$tabac))
 ```
+
 ### conclusion
+
 The test revealed a significant association between sex and smoking status (χ² = 7.002, df = 1, p = 0.008). Therefore, the data support the stereotype that smoking habits differ between men and women.
 
+## Are there any correlations between variables?
 
+```{r}
+cor(
+snore[c("age", "weight", "height", "alcool")]
+)
+```
+
+A strong positive correlation was observed between weight and height (r = 0.927), indicating that taller individuals generally weigh more. All other correlations were weak (\|r\| \< 0.20), suggesting little or no linear relationship between the remaining variables.
+
+## Final Conclusion
+
+This analysis examined several common stereotypes using statistical tests. The results showed that snorers did not weigh significantly more than non-snorers and were not more likely to smoke. However, snorers consumed significantly more alcohol than non-snorers. No significant difference in weight was found between men and women, whereas smoking status differed significantly between sexes, with women smoking less than men. Finally, correlation analysis revealed a strong positive relationship between height and weight, while the other quantitative variables showed only weak correlations.
+
+Overall, the data support some stereotypes (higher alcohol consumption among snorers and lower smoking prevalence among women) but do not support others (snorers being fatter, snorers smoking more, or men being fatter).
