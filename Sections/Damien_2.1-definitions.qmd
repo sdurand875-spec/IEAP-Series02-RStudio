@@ -32,7 +32,10 @@ Common assumptions include normal distribution, equal variances between groups, 
 
 ## What are the assumptions of non-parametric tests?
 
-Non-parametric tests assume that observations are independent, data is at least ordinal, and for tests like Mann-Whitney U, that both groups have a similar distribution shape. (Gemini) \## What is a p-value? A p-value is the probability of obtaining test results at least as extreme as the observed results, assuming the null hypothesis is true. (Sources: my undergraduate courses)
+Non-parametric tests assume that observations are independent, data is at least ordinal, and for tests like Mann-Whitney U, that both groups have a similar distribution shape. (Gemini) 
+
+## What is a p-value? 
+A p-value is the probability of obtaining test results at least as extreme as the observed results, assuming the null hypothesis is true. (Sources: my undergraduate courses)
 
 ## What is the risk of error when using a statistical test?
 
