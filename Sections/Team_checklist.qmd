@@ -1,0 +1,30 @@
+# Checklist of the grading criteria
+
+**Repository**
+
+- [ ] Public GitHub repository named `IEAP-Series02-RStudio`
+- [ ] `main` branch up to date (graded branch)
+- [ ] Clear and complete `README.md`
+- [ ] `LICENSE` file
+- [ ] `IEAP-Series02-Rstudio.qmd` file
+- [ ] Corresponding PDF file, rendered from the final version
+
+**Git history**
+
+- [ ] Clear history with meaningful commit messages
+- [ ] At least one commit per question of the report
+- [ ] Principled use of branches (one branch per member, Pull Requests into `main`)
+
+**Content of the notebook**
+
+- [ ] Authors and date in the header
+- [ ] Clickable link to the public GitHub repository
+- [ ] Analysis of the team's workflow strategy using Git
+- [ ] Analysis of the challenges encountered and lessons learned
+- [ ] Complete code and answers to all questions of the "Statistical tests" section (2.1, 2.2, 2.3)
+- [ ] Data sources with their URLs
+- [ ] Scientific references with their DOIs
+
+**Submission**
+
+- [ ] PDF uploaded on Moodle
