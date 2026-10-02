@@ -17,3 +17,9 @@ GitHub repository: <https://github.com/sdurand875-spec/IEAP-Series02-RStudio>
 {{< include Sections/Sarah_2.2-prepost.qmd >}}
 
 {{< include Sections/Albatoul_2.3-snore.qmd >}}
+
+{{< include Sections/Team_git-workflow.qmd >}}
+
+{{< include Sections/Team_sources-references.qmd >}}
+
+{{< include Sections/Team_checklist.qmd >}}
