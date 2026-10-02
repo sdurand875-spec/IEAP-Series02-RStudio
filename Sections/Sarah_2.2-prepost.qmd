@@ -113,7 +113,7 @@ To remain consistent with this approach, a non-parametric Wilcoxon rank-sum test
 
 ### 4. Which graph illustrates the effect of the treatment?
 
-A boxplot compares the distribution of performance before and after rehabilitation. Because there are only 8 observations per group, the individual values are also displayed, and the mean of each group is shown (black diamond), since the statistical test compares means. The groups are treated as independent, so the points are not connected between the two time points.
+A boxplot compares the distribution of performance before and after rehabilitation. Because there are only 8 observations per group, the individual values are also displayed, and the mean of each group is shown for information (black diamond). The boxes show the median and interquartile range, which are the statistics compared by the main test (Wilcoxon rank-sum test). The groups are treated as independent, so the points are not connected between the two time points.
 
 ```{r s22-boxplot}
 #| fig-cap: "Physical performance before and after rehabilitation. Boxes show the median and interquartile range, dots the individual values, and black diamonds the group means."
@@ -131,18 +131,17 @@ prepost %>%
 The graph shows a slight upward shift of performance after rehabilitation (both the median and the mean are higher), but the two distributions largely overlap.
 
 ### 5. Statistical test and result
-
-```{r s22-welch}
-# parametric test: Welch t-test (independent groups, two-sided)
-t.test(after, before, paired = FALSE)
-```
-
 ```{r s22-wilcoxon}
-# non-parametric check: Wilcoxon rank-sum (Mann-Whitney) test
+# main test: Wilcoxon rank-sum (Mann-Whitney) test, independent groups, two-sided
 wilcox.test(after, before, paired = FALSE, exact = FALSE)
 ```
 
-The Welch t-test did not show a significant difference in performance between before and after rehabilitation (t = 0.76, df = 13.8, p = 0.46). The 95% confidence interval of the difference in means (−4.6 to +9.6) includes 0. The Wilcoxon rank-sum test led to the same conclusion (W = 39.5, p = 0.46), which confirms that the result does not depend on the normality assumption.
+```{r s22-welch}
+# robustness check: Welch t-test (parametric equivalent)
+t.test(after, before, paired = FALSE)
+```
+
+The Wilcoxon rank-sum test did not show a significant difference in performance between before and after rehabilitation (W = 39.5, p = 0.46). The Welch t-test, used as a robustness check, led to the same conclusion (t = 0.76, df = 13.8, p = 0.46), and the 95% confidence interval of the difference in means (−4.6 to +9.6) includes 0. Both tests therefore agree: the data do not show a significant effect of rehabilitation on performance.
 
 **Result sentence:**
 
