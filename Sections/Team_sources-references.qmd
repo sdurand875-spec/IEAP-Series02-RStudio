@@ -1,0 +1,54 @@
+# Data sources
+
+- `PrePost.csv`: before/after performance of individuals with cardiac
+  conditions following a rehabilitation training. Provided on the course
+  Moodle: <https://moodle.umontpellier.fr/course/view.php?id=41022>
+- `snore.txt`: anthropometric and lifestyle data (age, weight, height, alcohol,
+  sex, snoring, smoking), one person per line. Provided on the course Moodle:
+  <https://moodle.umontpellier.fr/course/view.php?id=41022>
+
+# References
+
+## Statistical methods
+
+- Shapiro, S. S., & Wilk, M. B. (1965). An analysis of variance test for
+  normality (complete samples). *Biometrika*, 52(3–4), 591–611.
+  <https://doi.org/10.1093/biomet/52.3-4.591>
+- Welch, B. L. (1947). The generalization of "Student's" problem when several
+  different population variances are involved. *Biometrika*, 34(1–2), 28–35.
+  <https://doi.org/10.1093/biomet/34.1-2.28>
+- Wilcoxon, F. (1945). Individual comparisons by ranking methods.
+  *Biometrics Bulletin*, 1(6), 80–83. <https://doi.org/10.2307/3001968>
+- Mann, H. B., & Whitney, D. R. (1947). On a test of whether one of two random
+  variables is stochastically larger than the other. *The Annals of
+  Mathematical Statistics*, 18(1), 50–60.
+  <https://doi.org/10.1214/aoms/1177730491>
+- Pearson, K. (1900). On the criterion that a given system of deviations from
+  the probable in the case of a correlated system of variables is such that it
+  can be reasonably supposed to have arisen from random sampling.
+  *Philosophical Magazine*, 50(302), 157–175.
+  <https://doi.org/10.1080/14786440009463897>
+
+## Software
+
+- R Core Team (2026). *R: A language and environment for statistical
+  computing*. R Foundation for Statistical Computing, Vienna, Austria.
+  <https://www.R-project.org/>
+- Wickham, H., et al. (2019). Welcome to the tidyverse. *Journal of Open Source
+  Software*, 4(43), 1686. <https://doi.org/10.21105/joss.01686>
+- Müller, K. *here: A Simpler Way to Find Your Files*. R package.
+  <https://CRAN.R-project.org/package=here>
+- Allaire, J. J., et al. *Quarto*. <https://doi.org/10.5281/zenodo.5960048>
+
+## Part 2.1 – Statistical definitions
+
+- Jamet, Mme. *Introduction aux statistiques* [lecture notes]. Licence STAPS,
+  STAPS Marseille. Used for: variance and standard deviation, normal
+  distribution, parametric and non-parametric tests, assumptions of
+  parametric tests, p-value, risk of error, paired and unpaired tests.
+- Google Gemini (including the AI-generated answers displayed by Google
+  Search). Prompt (in French): "Explique-moi précisément ce que c'est que
+  [name of the definition]" (e.g. "Explique-moi précisément ce que c'est
+  que la médiane"). Accessed during the week of 28 September 2026.
+  Used for: mean and median, assumptions of non-parametric tests. The
+  answers were read and checked, then reformulated in English.

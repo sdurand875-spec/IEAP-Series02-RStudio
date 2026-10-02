@@ -1,0 +1,38 @@
+# Team workflow strategy with Git
+
+## Organisation of the repository
+
+The repository `IEAP-Series02-RStudio` was created by Sarah Durand from RStudio (`usethis::use_git()` and `usethis::use_github()`), then Albatoul Ahmad and Damien Clanet were added as collaborators. The default branch was renamed from `master` to `main`, since `main` is the graded branch.
+
+To allow three people to work on the same report without merge conflicts, we followed the strategy recommended in the assignment: a **master document** (`IEAP-Series02-Rstudio.qmd`) that only contains the YAML header and `{{</* include */>}}` statements, and **one sub-document per member** in the `Sections/` folder. Each member only edits their own file, so two people never modify the same file in parallel.
+
+## Branches and Pull Requests
+
+- `main` always contains the validated version of the report.
+- Each member works on a **personal branch** (e.g. `Sarah-2.2`, `albatoul-2.3`) and makes **at least one commit per question**, with a message describing the question answered (e.g. *"Answer 2.2.2 Q4: boxplot Before vs After"*).
+- When a part is finished, it is merged into `main` through a **Pull Request** on GitHub (PR #1 for part 2.2, PR #2 for part 2.3).
+- Before starting to work, each member pulls the latest version of `main`.
+
+## Issues
+
+When a problem was detected, it was reported in a **GitHub Issue** and fixed in a dedicated branch. For example, issue #3 reported leftover YAML headers and dashes in the section files; it was fixed in the branch `fix-section-headers` and automatically closed by PR #4 thanks to the keyword `Closes #3`.
+
+## Final integration
+
+The common parts of the report (this section, data sources, references and checklist) were added in the branch `final-report`, together with the final rendering of the PDF, and merged into `main` through a last Pull Request.
+
+# Challenges encountered and lessons learned
+
+- **Setting up Git and GitHub.** Connecting RStudio to GitHub required creating a personal access token (`usethis::create_github_token()` and `gitcreds::gitcreds_set()`). *Lesson:* a token is a password and must never be shared; if it is exposed, it must be revoked immediately.
+
+- **File paths in section files.** Running a chunk from a file in `Sections/` failed with *"cannot open file 'data/PrePost.csv'"*, because the working directory is then the `Sections/` folder, whereas it is the project root when rendering the main document. *Lesson:* the `here` package builds paths from the project root and works in both cases.
+
+- **YAML headers in included files.** RStudio adds a YAML header to every new Quarto document. Left in the section files, these headers (or their leftover `---` lines) hid titles or produced horizontal lines in the PDF. *Lesson:* included sub-documents must not have a header; the format is defined only in the master document.
+
+- **Editors overwriting files.** After a `git pull`, a section file that was still open in an editor was saved again with its old (empty) content. *Lesson:* close or reload open files before pulling; Git made it easy to restore the correct version (`git checkout -- <file>`).
+
+- **Visual editor reformatting.** The RStudio visual editor reflowed some paragraphs, which produced large diffs without any content change. *Lesson:* use the Source mode to keep the Git history readable.
+
+- **Respecting the workflow.** Part of the work on section 2.1 was pushed directly to `main` instead of going through a branch and a Pull Request. *Lesson:* agree on the workflow at the very beginning and protect the `main` branch if needed.
+
+- **Interpreting imperfect data.** `PrePost.csv` contains no participant identifier and no unit, which prevented a paired analysis. *Lesson:* checking the structure of the data before choosing a statistical test is essential.
