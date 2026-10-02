@@ -2,28 +2,33 @@
 
 **Repository**
 
-- [ ] Public GitHub repository named `IEAP-Series02-RStudio`
-- [ ] `main` branch up to date (graded branch)
-- [ ] Clear and complete `README.md`
-- [ ] `LICENSE` file
-- [ ] `IEAP-Series02-Rstudio.qmd` file
-- [ ] Corresponding PDF file, rendered from the final version
+- [x] Public GitHub repository named `IEAP-Series02-RStudio`
+- [x] `main` branch up to date (graded branch)
+- [x] Clear and complete `README.md`
+- [x] `LICENSE` file
+- [x] `IEAP-Series02-Rstudio.qmd` file
+- [x] Corresponding PDF file, rendered from the final version
 
 **Git history**
 
-- [ ] Clear history with meaningful commit messages
-- [ ] At least one commit per question of the report
-- [ ] Principled use of branches (one branch per member, Pull Requests into `main`)
+- [x] Clear history with meaningful commit messages
+- [ ]At least one commit per question of the report (done for parts 2.2
+  and 2.3; part 2.1 was committed in a single commit, see *Challenges
+  encountered and lessons learned*)
+- [ ] Principled use of branches (one branch per member, Pull Requests into
+  `main`) (done for parts 2.2, 2.3 and for the fixes and final report;
+  part 2.1 was pushed directly to `main`, see *Challenges encountered and
+  lessons learned*)
 
 **Content of the notebook**
 
-- [ ] Authors and date in the header
-- [ ] Clickable link to the public GitHub repository
-- [ ] Analysis of the team's workflow strategy using Git
-- [ ] Analysis of the challenges encountered and lessons learned
-- [ ] Complete code and answers to all questions of the "Statistical tests" section (2.1, 2.2, 2.3)
-- [ ] Data sources with their URLs
-- [ ] Scientific references with their DOIs
+- [x] Authors and date in the header
+- [x] Clickable link to the public GitHub repository
+- [x] Analysis of the team's workflow strategy using Git
+- [x] Analysis of the challenges encountered and lessons learned
+- [x] Complete code and answers to all questions of the "Statistical tests" section (2.1, 2.2, 2.3)
+- [x] Data sources with their URLs
+- [x] Scientific references with their DOIs
 
 **Submission**
 
