@@ -40,3 +40,15 @@
   <https://CRAN.R-project.org/package=here>
 - Allaire, J. J., et al. *Quarto*. <https://doi.org/10.5281/zenodo.5960048>
 
+## Part 2.1 – Statistical definitions
+
+- Jamet, Mme. *Introduction aux statistiques* [lecture notes]. Licence STAPS,
+  STAPS Marseille. Used for: variance and standard deviation, normal
+  distribution, parametric and non-parametric tests, assumptions of
+  parametric tests, p-value, risk of error, paired and unpaired tests.
+- Google Gemini (including the AI-generated answers displayed by Google
+  Search). Prompt (in French): "Explique-moi précisément ce que c'est que
+  [name of the definition]" (e.g. "Explique-moi précisément ce que c'est
+  que la médiane"). Accessed during the week of 28 September 2026.
+  Used for: mean and median, assumptions of non-parametric tests. The
+  answers were read and checked, then reformulated in English.
