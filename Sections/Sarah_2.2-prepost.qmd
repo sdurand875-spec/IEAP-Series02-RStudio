@@ -23,7 +23,7 @@ No variable identifies the participants, so the file itself does not tell us whe
 
 ## The analysis
 
-### 1. Does the treatment have an effect?
+### Does the treatment have an effect?
 
 The objective is to determine whether the rehabilitation program has an effect on physical performance. Because rehabilitation is expected to improve the patients' performance, we expect the performance values to be higher **after** the rehabilitation program than **before**. The comparison of interest is therefore: **Before vs After rehabilitation**.
 
@@ -55,7 +55,7 @@ median(prepost$perf[prepost$time == "After"]) -
 
 Descriptively, performance was slightly higher after rehabilitation than before, both in mean (137.6 ± 7.0 vs 135.1 ± 6.2, i.e. +2.5 units) and in median (137.5 \[IQR = 9.25\] vs 135.5 \[IQR = 7.00\], i.e. +2 units). Mean ± SD is appropriate only if the data are normally distributed; otherwise, the median and IQR should be preferred. Normality is checked in question 3. In both cases, the difference is small compared with the variability between individuals, and the two distributions largely overlap (range 125–145 before vs 127–148 after). Whether this difference is statistically significant is tested in question 5.
 
-### 2. What comparison are you going to make?
+### What comparison are you going to make?
 
 We compare physical performance **before** vs **after** the rehabilitation program (8 observations in each group).
 
@@ -81,7 +81,7 @@ Moreover, the values are sorted in increasing order within each group. Pairing t
 
 For these reasons, the two sets of observations are treated as **independent groups**. This is a conservative choice: if the data were truly paired, a paired test would be more powerful, so we may miss a real effect.
 
-### 3. Which test will you use? Parametric or non-parametric?
+### Which test will you use? Parametric or non-parametric?
 
 **Hypotheses** (two-sided test):
 
@@ -111,7 +111,7 @@ Because of the small sample size, the data are mainly described using the median
 
 To remain consistent with this approach, a non-parametric Wilcoxon rank-sum test (Mann–Whitney test) will be used to compare performance before and after rehabilitation.
 
-### 4. Which graph illustrates the effect of the treatment?
+### Which graph illustrates the effect of the treatment?
 
 A boxplot compares the distribution of performance before and after rehabilitation. Because there are only 8 observations per group, the individual values are also displayed, and the mean of each group is shown for information (black diamond). The boxes show the median and interquartile range, which are the statistics compared by the main test (Wilcoxon rank-sum test). The groups are treated as independent, so the points are not connected between the two time points.
 
@@ -130,7 +130,7 @@ prepost %>%
 
 The graph shows a slight upward shift of performance after rehabilitation (both the median and the mean are higher), but the two distributions largely overlap.
 
-### 5. Statistical test and result
+### Statistical test and result
 ```{r s22-wilcoxon}
 # main test: Wilcoxon rank-sum (Mann-Whitney) test, independent groups, two-sided
 wilcox.test(after, before, paired = FALSE, exact = FALSE)
