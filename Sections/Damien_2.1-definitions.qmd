@@ -1,53 +1,43 @@
----
-title: "Statistical Definition"
-format: html
-editor: visual
----
-
 # What is a statistical test, and when to use it?
 
 ## What is a median? A mean?
-The mean is the arithmetic average of a dataset. 
-The median is the middle value when the data is sorted in order 
-(Sources:First definition of my research motor)
+
+The mean is the arithmetic average of a dataset. The median is the middle value when the data is sorted in order (Sources:First definition of my research motor)
 
 ## What is a variance? A standard deviation?
-Variance is the average squard deviation of each data point frome the mean. 
 
-The standard deviation is the square root of the variance, which expresses the dispersion of the values. 
-(Sources: my old licence pptx)
+Variance is the average squard deviation of each data point frome the mean.
+
+The standard deviation is the square root of the variance, which expresses the dispersion of the values. (Sources: my old licence pptx)
 
 ## What is a normal distribution?
-A normal distribution is a is a continuous and symmetric. There is the same % in the 2 sides of the mean. And the mean= the median = mode. It is a bell-shaped probability distribution where data clusters around the mean, with 68% of values within one standard deviation and 95% within two. 
-(Sources: my undergraduate courses)
+
+A normal distribution is a is a continuous and symmetric. There is the same % in the 2 sides of the mean. And the mean= the median = mode. It is a bell-shaped probability distribution where data clusters around the mean, with 68% of values within one standard deviation and 95% within two. (Sources: my undergraduate courses)
 
 ## What is a statistical test?
-A statistical test uses sample data to test a hypothesis and draw conclusions about a larger population. 
-(Gemini)
+
+A statistical test uses sample data to test a hypothesis and draw conclusions about a larger population. (Gemini)
 
 ## When to use a statistical test?
-We use a statistical test to check if the results in your data are real, or if they just happened by chance. 
-(Gemini)
+
+We use a statistical test to check if the results in your data are real, or if they just happened by chance. (Gemini)
 
 ## What is a parametric test? A non-parametric test?
-A parametric test assumes that your data follows a specific pattern (usually a normal distribution), while a non-parametric test doesn't make any assumptions about how the data is distributed. 
-(Sources: my undergraduate courses)
+
+A parametric test assumes that your data follows a specific pattern (usually a normal distribution), while a non-parametric test doesn't make any assumptions about how the data is distributed. (Sources: my undergraduate courses)
 
 ## What are the assumptions of parametric tests?
-Common assumptions include normal distribution, equal variances between groups, independent observations, and data measured on an interval or ratio scale. 
-(Sources: my undergraduate courses)
+
+Common assumptions include normal distribution, equal variances between groups, independent observations, and data measured on an interval or ratio scale. (Sources: my undergraduate courses)
 
 ## What are the assumptions of non-parametric tests?
-Non-parametric tests assume that observations are independent, data is at least ordinal, and for tests like Mann-Whitney U, that both groups have a similar distribution shape.
-(Gemini) 
-## What is a p-value?
-A p-value is the probability of obtaining test results at least as extreme as the observed results, assuming the null hypothesis is true. 
-(Sources: my undergraduate courses)
+
+Non-parametric tests assume that observations are independent, data is at least ordinal, and for tests like Mann-Whitney U, that both groups have a similar distribution shape. (Gemini) \## What is a p-value? A p-value is the probability of obtaining test results at least as extreme as the observed results, assuming the null hypothesis is true. (Sources: my undergraduate courses)
 
 ## What is the risk of error when using a statistical test?
-The primary risks are a Type I error alpha, which is rejecting a true null hypothesis (false positive), and a Type II error beta, which is failing to reject a false null hypothesis (false negative).
-(Sources: my undergraduate courses)
+
+The primary risks are a Type I error alpha, which is rejecting a true null hypothesis (false positive), and a Type II error beta, which is failing to reject a false null hypothesis (false negative). (Sources: my undergraduate courses)
 
 ## What is the difference between a paired and an unpaired test?
-A paired test compares two set of measurements from the same group (like before and after a treatment), while an unpaired test compares two completely independent groups.
-(Sources: my undergraduate courses)
+
+A paired test compares two set of measurements from the same group (like before and after a treatment), while an unpaired test compares two completely independent groups. (Sources: my undergraduate courses)
